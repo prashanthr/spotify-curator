@@ -1,6 +1,6 @@
 {
   "name": "create-node-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create a node js app in seconds with all essential packages",
   "main": "index.js",
   "repository": "https://github.com/prashanthr/create-node-app",
