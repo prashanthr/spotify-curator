@@ -13,7 +13,6 @@ var app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({limit: config.bodyParserLimit}))
-app.use(express.static(path.join(__dirname, '/../../build')))
 
 publicRouter.get('/api/health', (req, res) => {
     res.send({
@@ -24,9 +23,6 @@ app.use('/', publicRouter)
 
 let server = async () => {
   let httpServer = http.Server(app)
-  app.use(function (req, res) {
-    res.sendFile(path.join(__dirname, '/../../build', 'index.html'))
-  })
   httpServer.listen(config.port, () => {
     debug(`Server running on ${config.port}`)
   })
