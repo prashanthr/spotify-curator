@@ -1,7 +1,6 @@
 /* Server */
-import express from  'express'
+import express from 'express'
 import http from 'http'
-import path from 'path'
 import config from 'config'
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -15,9 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json({limit: config.bodyParserLimit}))
 
 publicRouter.get('/api/health', (req, res) => {
-    res.send({
-        apiStatus: "Healthy!"
-    })
+  res.send({
+    apiStatus: 'Healthy!'
+  })
 })
 app.use('/', publicRouter)
 
