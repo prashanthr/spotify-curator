@@ -6,6 +6,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import _debug from 'debug'
 var debug = _debug('server')
+import spotifyApi from './api/spotify'
 var publicRouter = express.Router()
 
 var app = express()
@@ -19,6 +20,7 @@ publicRouter.get('/api/health', (req, res) => {
   })
 })
 app.use('/', publicRouter)
+app.use(spotifyApi)
 
 let server = async () => {
   let httpServer = http.Server(app)
