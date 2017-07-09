@@ -6,11 +6,14 @@ var debug = _debug('api:spotify')
 
 export default (app) => {
   publicRouter.get('/api/spotify', async (req, res) => {
-    debug('Hello Spotify')
-    res.send({
-      text: 'Hello Spotify',
-      data: Spotify
-    })
+    const helloSpotify = 'Hello Spotify'
+    debug(helloSpotify)
+    res.send(helloSpotify)
   })
+
+  publicRouter.get('/api/search/:term', async (req, res) => {
+    res.send(await Spotify.search({ query: req.params.term }))
+  })
+
   return app
 }

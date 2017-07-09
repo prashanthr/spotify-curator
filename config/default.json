@@ -5,6 +5,8 @@
     "bodyParserLimit": "0.5mb",
     "port": 9095,
     "spotify": {
-        "clientId" : "caafe181146a449fb28320e7354a10ce"
+        "clientId" : "caafe181146a449fb28320e7354a10ce",
+        "clientSecret": "",
+        "redirectUri": "http://localhost:9095/callback"
     }
 }
