@@ -18,6 +18,7 @@
     "cors": "^2.8.3",
     "debug": "^2.6.4",
     "express": "^4.15.2",
+    "spotify-web-api-node": "^2.4.0",
     "standard-version": "^4.0.0"
   },
   "scripts": {
