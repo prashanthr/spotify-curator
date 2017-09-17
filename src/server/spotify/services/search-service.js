@@ -10,8 +10,8 @@ export default class SearchService extends SpotifyBaseService {
       debug(`Searching for ${query}`)
       const result = 
         await this.spotify
-        .search(query, types, options)
+          .search(query, types, options)
       debug('Result: ', result)
-      return result
+      return result.body
   }
 }

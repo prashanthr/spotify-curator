@@ -3,14 +3,11 @@ import config from 'config'
 import _debug from 'debug'
 var debug = _debug('spotify-base-service')
 
-// credentials are optional
 var spotify = new SpotifyWebApi({
   clientId: config.spotify.clientId,
   clientSecret: config.spotify.clientSecret,
   redirectUri: config.spotify.redirectUri
 })
-
-// spotify.setAccessToken(config.spotify.accessToken)
 
 export default class SpotifyServiceBase {
   constructor () {
