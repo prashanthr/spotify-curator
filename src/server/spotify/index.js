@@ -4,6 +4,7 @@ import SpotifyBaseService from './services/base-service'
 import SearchService from './services/search-service'
 import FeatureService from './services/feature-service'
 import AnalysisService from './services/analysis-service'
+import PlaylistService from './services/playlist-service'
 import { keyBy } from 'lodash'
 import _debug from 'debug'
 var debug = _debug('spotify')
@@ -14,6 +15,7 @@ class Spotify {
     this.searchService = new SearchService()
     this.featureService = new FeatureService()
     this.analysisService = new AnalysisService()
+    this.playlistService = new PlaylistService()
     debug('Spotify', this.service.spotify)
   }
 
@@ -29,6 +31,14 @@ class Spotify {
       await this.refresh()
     } else {
       await this.initialize()
+    }
+  }
+
+  async parseResponse (response) {
+    if (response.statusCode !== 200) {
+      throw new Error(response.body)
+    } else {
+      return response.body
     }
   }
 
@@ -48,6 +58,13 @@ class Spotify {
   async analyze (trackId) {
     await this.flow()
     return await this.analysisService.analyze(trackId)
+  }
+
+  async createPlaylist (name: string, 
+    description: string
+    public: boolean, 
+    collaborative: boolean) {
+      await this.playlistService.create(name, description, public, collaborative)
   }
 }
 
