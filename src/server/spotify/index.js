@@ -1,4 +1,5 @@
 // @flow
+
 // import SpotifyWebApi from 'spotify-web-api-node'
 import SpotifyBaseService from './services/base-service'
 import SearchService from './services/search-service'
@@ -26,19 +27,15 @@ class Spotify {
     await this.service.refreshToken()
   }
 
-  async flow () {
+  async flow (authRequired: boolean = false) {
+    if (authRequired) {
+      await this.service.authFlow()
+      return
+    }
     if (this.service.isInitialized) {
       await this.refresh()
     } else {
       await this.initialize()
-    }
-  }
-
-  async parseResponse (response) {
-    if (response.statusCode !== 200) {
-      throw new Error(response.body)
-    } else {
-      return response.body
     }
   }
 
@@ -60,12 +57,32 @@ class Spotify {
     return await this.analysisService.analyze(trackId)
   }
 
-  async createPlaylist (name: string, 
-    description: string
-    public: boolean, 
-    collaborative: boolean) {
-      await this.playlistService.create(name, description, public, collaborative)
+  async createPlaylist ({
+    username, 
+    name,
+    publicFlag, 
+    collaborative
+  }) {
+    await this.flow(true)
+    return await this.playlistService.create(username, name, publicFlag, collaborative)
   }
+
+  async updatePlaylist (
+    username: string,
+    playlistId: string,
+    name: string,
+    publicFlag: boolean,
+    collaborative: boolean) {
+      return await this.playlistService.update(username, playlistId, name, publicFlag, collaborative)
+  }
+
+  async addTracksToPlaylist (
+    username: string,
+    playlistId: string,
+    trackUris: string[],
+    position: number) {
+      return await this.playlistService.addTracks(username, playlistId, trackUris, position)
+    }
 }
 
 export default new Spotify()
