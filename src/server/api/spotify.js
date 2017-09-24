@@ -58,5 +58,17 @@ export default (app) => {
     res.send(await Spotify.analyze(req.params.id))
   })
 
+  /**
+   * {
+   *   username: string,
+   *   name: string,
+   *   trackUris: ['spotify:track:23iour'],
+   *   position: 0 // optional
+   * }
+   */
+  publicRouter.post('/api/spotify/playlist/create', async (req, res) => {
+    res.send(await Spotify.createPlaylist(req.body))
+  })
+
   return app
 }
